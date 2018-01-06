@@ -7,7 +7,7 @@
  
  @author NetCore
  @copyright  2016 NetCore
- @version    1.0.0
+ @version    2.1.1
  */
 
 #import <Foundation/Foundation.h>

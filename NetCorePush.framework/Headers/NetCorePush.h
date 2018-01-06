@@ -4,7 +4,7 @@
  @brief This is the header file
  @author NetCore
  @copyright  2016 NetCore
- @version    1.0.0
+ @version    2.1.1
  */
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
@@ -21,5 +21,3 @@ FOUNDATION_EXPORT double NetCorePushVersionNumber;
 FOUNDATION_EXPORT const unsigned char NetCorePushVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <NetCorePush/PublicHeader.h>
-
-

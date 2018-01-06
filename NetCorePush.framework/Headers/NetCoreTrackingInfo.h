@@ -1,5 +1,3 @@
-
-
 #ifndef NetCoreTrackingInfo_h
 #define NetCoreTrackingInfo_h
 
