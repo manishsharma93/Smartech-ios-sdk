@@ -7,7 +7,7 @@
  
  @author NetCore
  @copyright  2016 NetCore
- @version    2.1.1
+ @version    2.1.2
  */
 #import <Foundation/Foundation.h>
 #import <UserNotifications/UserNotifications.h>
@@ -58,4 +58,7 @@
  @Method userNotificationWillPresentNotification :- use to manage notification present event(onward ios 10)
  */
 -(void)userNotificationWillPresentNotification:(UNNotification *)notification;
+
+
+-(void)handleDeliverAction:(NSDictionary *)userInfo;
 @end

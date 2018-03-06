@@ -1,72 +1,76 @@
 [![Netcore Logo](https://netcore.in/wp-content/themes/netcore/img/Netcore-new-Logo.png)](http:www.netcore.in)
 
-# Netcore iOS SDK  
+# Netcore iOS SDK
 Smartech iOS SDK
 
 
 ## Integration using CocoaPod
 1. Install CocoaPods on your computer.
 
-2) open your project add Create pod file using below command
+2. Open your project and create pod file using below command
+```swift
+pod init
+```
+3. Add following line in your podfile
+```swift
+pod 'Netcore-Smartech-iOS-SDK'
+```
 
-```Pod init```
+4. Run following command in your project directory
+```swift
+pod install
+```
 
-3) Add following Line in your podfile
-
-```pod 'Netcore-Smartech-iOS-SDK'```
-
-4) Run following command in your project directory
-
-```Pod Install```
-
-5) open App.xcworkspace and build.
+5. Open App.xcworkspace and build.
 
 ## NetCore Manual Integration
-1) Download iOS SDK and Unzip the file. Open Framework folder - inside it you will
+1. Download iOS SDK and Unzip the file. Open Framework folder - inside it you will
 see NetCorePush.framework file.
-2) Open existing or create a new project in Xcode and drag drop or add framework
+2. Open existing or create a new project in Xcode and drag drop or add framework
 in Target > Embedded Binaries section
 3. Add following frameworks inside your application if required
-```
+```swift
 Security
 CoreLocation
 SystemConfiguration
 JavaScriptCore
 ```
-4) Add Following capability inside your application
-```
+4. Add Following capability inside your application
+```swift
 Push Notification
 Keychain
 ```
-5)Create Bridge file in existing swift project if required and add Following code inside file.
-```
+5. Create Bridge file in existing swift project if required and add Following code inside file.
+```swift
 import NetCorePush
 ```
 
 ## NetCore SDK Initialization
-1) Import following file in App Delegate File
-```import User Notifications```
-```import UserNotificationsUI```
-```import NetCorePush```
+1. Import following file in App Delegate File
+```swift
+import UserNotifications
+import UserNotificationsUI
+import NetCorePush
+```
 2. Add NetCore Application AppID in support in Finish Launching Methods
 (AppDelegate file)
-```
+```swift
 let netCore_AppID = "your App Id which you get from Netcore smartech admin
 panel"
 ```
 // Set up NetCore Application Id-------------------------------------
+```swift
+NetCoreSharedManager.sharedInstance().setUpApplicationId(netCore_AppID)
 ```
-NetCoreSharedManager . sharedInstance (). setUpApplicationId ( netCore_AppID )
-```
-//set up push delegate 
-```
+//set up push delegate
+```swift
 NetCorePushTaskManager.sharedInstance().delegate = self
 ```
 // set up your third party framework initialization process as per their document
 
 3. Add Push Notification support in Finish Launching Methods (AppDelegate
 file)
-```
+```swift
 if #available(iOS 10, *) {
 UNUserNotificationCenter.current().delegate = self
 UNUserNotificationCenter.current().requestAuthorization(options:
@@ -90,7 +94,7 @@ UIApplication.shared.registerForRemoteNotifications()
 
 4. Check Application Launching from Push/Local Notification support in
 Finish Launching Methods (AppDelegate file)
-```
+```swift
 if (launchOptions != nil){
 NetCorePushTaskManager.sharedInstance().handelApplicationLaunchEvent(launchOpt
 ions)
@@ -98,7 +102,7 @@ ions)
 ```
 
 5. Register Device With NetCore SDK (AppDelegate file)
-```
+```swift
 func application ( _ application : UIApplication,
 didRegisterForRemoteNotificationsWithDeviceToken deviceToken : Data) {
 // Register device token with third party SDK as per their document
@@ -117,8 +121,8 @@ document
 }
 ```
 
-6) Handle Push/Local Notification Delegate Events (AppDelegate file)
-```
+6. Handle Push/Local Notification Delegate Events (AppDelegate file)
+```swift
 func application ( _ application : UIApplication, didReceiveRemoteNotification
 userInfo : [ AnyHashable : Any ]) {
 // perform notification received/click action as per third party SDK as per their
@@ -154,8 +158,8 @@ NetCorePushTaskManager.sharedInstance().userNotificationWillPresent(notification
 }
 }
 ```
-7)Handle Deep Linking
-```
+7. Handle Deep Linking
+```swift
 func application(_ application: UIApplication,
 open url: URL,
 sourceApplication: String?,
@@ -173,20 +177,26 @@ if strType .lowercased().contains ("your app deep link"){
 }
 }
 ```
-9) Login with NetCore
-```
+8. Login with NetCore
+```swift
 // strEmail = pass your device identity
 NetCoreInstallation.sharedInstance().netCorePushLogin(strEmail) {
 (statusCode:Int) in }
 ```
-10) Logout
-```
+9. Logout
+```swift
 // strEmail = pass your device identity
 NetCoreInstallation.sharedInstance().netCorePushLogout { (statusCode:Int) in }
 ```
-11) Events Tracking :
-Following is the list of tracking events
+10. Profile Push
+```swift
+// strEmail = pass your device identity
+let info = ["name":"Tester", "age":"23", "mobile":"9898948849"]
+NetCoreInstallation.sharedInstance().netCoreProfilePush(strEmail, payload: ino, block: nil)
 ```
+11. Events Tracking:
+Following is the list of tracking events
+```swift
 tracking_PageBrowse = 1,
 tracking_AddToCart = 2,
 tracking_CheckOut = 3,
@@ -197,22 +207,27 @@ tracking_AppLaunch = 21
 ```
 You can use this events following ways
 
-12)Track normal event
-```
+12. Track normal event
+```swift
 // for sending application launch event
 NetCoreAppTracking.sharedInstance().sendEvent(Int(UInt32(tracking_AppLaunch.ra
 wValue)), block: nil)
 ```
-13)Track event with custom payload
-```
+13. Track event with custom payload
+```swift
 //add To cart event with custom array of data
 NetCoreAppTracking.sharedInstance().sendEvent(withCustomPayload:
-Int(UInt32(tracking_PageBrowse.rawValue)), payload: arrayAddToCart , block: nil)# 
+Int(UInt32(tracking_PageBrowse.rawValue)), payload: arrayAddToCart , block: nil)#
 ```
+14. To fetch delivered push notifications
+```swift
+let array : Array = netCoreSharedManager.sharedInstance().getNotifications()
+```
+
 ### Deployment Over Apple Store
 Add Following runscript in your application target ,when you are deploying application
 over apple store,this run script use remove unused architecture in release mode
-```
+```swift
 echo "Target architectures: $ARCHS"
 APP_PATH="${TARGET_BUILD_DIR}/${WRAPPER_NAME}"
 find "$APP_PATH" -name '*.framework' -type d | while read -r FRAMEWORK

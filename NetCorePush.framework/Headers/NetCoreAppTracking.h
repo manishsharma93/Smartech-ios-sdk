@@ -7,10 +7,10 @@
  
  @author NetCore
  @copyright  2016 NetCore
- @version    2.1.1
+ @version    2.1.2
  */
 #import <Foundation/Foundation.h>
-#import <NetCorePush/NetCoreConstant.h>
+#import "NetCoreConstant.h"
 
 @interface NetCoreAppTracking : NSObject
 /*

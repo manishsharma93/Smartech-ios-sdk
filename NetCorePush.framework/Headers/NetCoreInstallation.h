@@ -7,11 +7,13 @@
  
  @author NetCore
  @copyright  2016 NetCore
- @version    2.1.1
+ @version    2.1.2
  */
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
-#import <NetCorePush/NetCoreConstant.h>
+
+//#import <NetCorePush/NetCoreConstant.h>
+#import "NetCoreConstant.h"
 
 @interface NetCoreInstallation : NSObject
 
@@ -36,5 +38,7 @@
  netCoreProfilePush taking input as Identity and custom payload and return response block
  */
 -(void)netCoreProfilePush:(NSString *)strIdentity Payload:(NSDictionary *)payload Block:(NetCoreStatusBlock)block;
+//Manish
+-(void)netCorePushRegisteration:(NSString *)strIdentity withDeviceToken:(NSData *)deviceToken Block:(NetCoreStatusBlock)block;
 
 @end

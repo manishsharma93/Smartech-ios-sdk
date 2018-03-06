@@ -7,7 +7,7 @@
  
  @author NetCore
  @copyright  2016 NetCore
- @version    2.1.1
+ @version    2.1.2
  */
 
 #import <Foundation/Foundation.h>
@@ -57,5 +57,43 @@
  @return - string
  */
 -(NSString *)getIdentity;
+/*
+ @Method registerForPushNotifications: this method use to register for Push Notifications
+ @return - void
+ */
+-(void)registerForPushNotifications;
+/*
+ @Method getAllPushNotifications: this method use to get all the Push Notifications received
+ @return - Array
+ */
+-(NSArray *)getNotifications;
+/*
+ @Method handleApplicationLaunchEvent: this method use to handle App launch Events and Setting Application ID
+ @return - void
+ */
+-(void)handleApplicationLaunchEvent:(id)launchOptions forApplicationId:(NSString *)AppId;
+/*
+ @Method setDeepLinkQueryParameters: this method use to set query parameters
+ @param  notiData - contains query parameters of url
+ */
+-(void)setDeepLinkQueryParameters:(NSDictionary *)notiData;
+
+/*
+ @Method checkSessionId: this method checks for session id expiration and renews it.
+ */
+-(void)checkSessionId;
+
+/*
+ @Method addDeepLinkParametersInDict: adds deeplink parameters to every request.
+ */
+
+-(void)addDeepLinkParametersInDict:(NSMutableDictionary *)requestDict;
+
+/*
+ @Method setSessionTimeOutInMinutes: set session timeout in minutes.
+ */
+
+//-(void)setSessionTimeOutInMinutes:(NSInteger)minutes;
+
 
  @end

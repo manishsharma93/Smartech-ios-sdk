@@ -7,4 +7,10 @@ enum AppTrackingEvents{
     tracking_AppLaunch = 21,
     tracking_AppUnInstall = 24
 };
+
+enum AdFrequencyCapping{
+    freq_session,
+    freq_day,
+    freq_campaign
+};
 #endif /* NetCoreTrackingInfo_h */
