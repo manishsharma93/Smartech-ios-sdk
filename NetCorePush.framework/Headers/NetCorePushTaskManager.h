@@ -7,7 +7,7 @@
  
  @author NetCore
  @copyright  2016 NetCore
- @version    2.1.2
+ @version    2.1.3
  */
 #import <Foundation/Foundation.h>
 #import <UserNotifications/UserNotifications.h>
@@ -60,5 +60,4 @@
 -(void)userNotificationWillPresentNotification:(UNNotification *)notification;
 
 
--(void)handleDeliverAction:(NSDictionary *)userInfo;
 @end

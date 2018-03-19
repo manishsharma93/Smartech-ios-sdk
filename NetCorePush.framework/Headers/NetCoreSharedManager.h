@@ -7,7 +7,7 @@
  
  @author NetCore
  @copyright  2016 NetCore
- @version    2.1.2
+ @version    2.1.3
  */
 
 #import <Foundation/Foundation.h>
@@ -63,7 +63,7 @@
  */
 -(void)registerForPushNotifications;
 /*
- @Method getAllPushNotifications: this method use to get all the Push Notifications received
+ @Method getNotifications: this method use to get all the Push Notifications received
  @return - Array
  */
 -(NSArray *)getNotifications;
@@ -89,11 +89,7 @@
 
 -(void)addDeepLinkParametersInDict:(NSMutableDictionary *)requestDict;
 
-/*
- @Method setSessionTimeOutInMinutes: set session timeout in minutes.
- */
 
-//-(void)setSessionTimeOutInMinutes:(NSInteger)minutes;
 
 
  @end

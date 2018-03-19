@@ -146,16 +146,6 @@ response : UNNotificationResponse, withCompletionHandler completionHandler :
 document
 NetCorePushTaskManager.sharedInstance().userNotificationdidReceive(response)
 }
-// This is key callback to present notification while the app is in foreground
-@objc (userNotificationCenter: willPresentNotification :withCompletionHandler:)
-@available(iOS 10.0, *)
-func userNotificationCenter (_ center: UNUserNotificationCenter, willPresent
-notification: UNNotification, withCompletionHandler completionHandler :
-@escaping (UNNotificationPresentationOptions) -> Void) {
-// perform notification received action as per third party SDK as per their document
-completionHandler( [.alert,.sound,.badge])
-NetCorePushTaskManager.sharedInstance().userNotificationWillPresent(notification)
-}
 }
 ```
 7. Handle Deep Linking

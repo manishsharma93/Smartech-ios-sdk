@@ -7,7 +7,7 @@
  
  @author NetCore
  @copyright  2016 NetCore
- @version    2.1.2
+ @version    2.1.3
  */
 #import <Foundation/Foundation.h>
 #import "NetCoreConstant.h"
@@ -18,6 +18,15 @@
  @return NetCoreAppTracking instance
  */
 + (instancetype)sharedInstance;
+
+
+/*
+  sendAppTrackingEvent takes event and return response block
+ */
 -(void)sendAppTrackingEvent:(NSInteger)event Block:(NetCoreStatusBlock)block;
+
+/*
+ sendAppTrackingEventWithCustomPayload takes event and custom payload and return response block
+ */
 -(void)sendAppTrackingEventWithCustomPayload:(NSInteger)event Payload:(NSMutableArray *)payload Block:(NetCoreStatusBlock)block;
 @end
