@@ -7,7 +7,7 @@
  
  @author NetCore
  @copyright  2016 NetCore
- @version    2.1.3
+ @version    2.1.4
  */
 #import <Foundation/Foundation.h>
 #import "NetCoreConstant.h"

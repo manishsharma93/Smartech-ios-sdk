@@ -7,12 +7,11 @@
  
  @author NetCore
  @copyright  2016 NetCore
- @version    2.1.3
+ @version    2.1.4
  */
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
-#import <NetCorePush/NetCoreConstant.h>
-
+#import "NetCoreConstant.h"
 @interface NetCoreInstallation : NSObject
 
 /*
