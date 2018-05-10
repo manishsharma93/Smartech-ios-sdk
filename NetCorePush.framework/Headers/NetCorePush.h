@@ -4,7 +4,7 @@
  @brief This is the header file
  @author NetCore
  @copyright  2016 NetCore
- @version    2.1.4
+ @version    2.2.0
  */
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
@@ -13,6 +13,7 @@
 #import <NetCorePush/NetCoreAppTracking.h>
 #import <NetCorePush/NetCoreTrackingInfo.h>
 #import <NetCorePush/NetCorePushTaskManager.h>
+#import <NetCorePush/NetCoreNotificationService.h>
 
 //! Project version number for NetCorePush.
 FOUNDATION_EXPORT double NetCorePushVersionNumber;
