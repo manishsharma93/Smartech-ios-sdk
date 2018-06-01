@@ -7,7 +7,7 @@
  
  @author NetCore
  @copyright  2016 NetCore
- @version    2.2.0
+ @version    2.1.5
  */
 #import <Foundation/Foundation.h>
 #import <UserNotifications/UserNotifications.h>
@@ -43,6 +43,7 @@
  @Method didReceiveRemoteNotification :- use to handle push notification event (before ios 10)
  */
 -(void)didReceiveRemoteNotification:(NSDictionary *)userInfo;
+
 /*
  @Method didReceiveLocalNotification :- use to handle local notification event (before ios 10)
  */

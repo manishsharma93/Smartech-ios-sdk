@@ -21,7 +21,14 @@ pod 'Netcore-Smartech-iOS-SDK'
 pod install
 ```
 
-5. Open App.xcworkspace and build.
+5. Add Following capability inside your application
+```swift
+Push Notification
+Keychain
+Background Mode -> Remote Notification
+```
+
+6. Open App.xcworkspace and build.
 
 ## NetCore Manual Integration
 1. Download iOS SDK and Unzip the file. Open Framework folder - inside it you will
@@ -33,14 +40,13 @@ in Target > Embedded Binaries section
 Security
 CoreLocation
 SystemConfiguration
-JavaScriptCore
+JavaScriptCore 
 ```
 4. Add Following capability inside your application
 ```swift
 Push Notification
 Keychain
-Background Mode -> Background fetch
-App Groups(Add one group with name “group.com.Smartech.com”)
+Background Mode -> Remote Notification
 ```
 5. Create Bridge file in existing swift project if required and add Following code inside file.
 ```objc
@@ -58,18 +64,19 @@ import NetCorePush
 (AppDelegate file)
 ```swift
 let netCore_AppID = "your App Id which you get from Netcore smartech admin panel"
-// Set up NetCore Application Id-------------------------------------
+// Set up NetCore  Application Id
 NetCoreSharedManager.sharedInstance().handleApplicationLaunchEvent(launchOptions, forApplicationId: netCore_AppID)
+
 //set up push delegate
 NetCorePushTaskManager.sharedInstance().delegate = self
-// set up your third party framework initialization process as per their document
 ```
 3. Register Device With NetCore SDK (AppDelegate file)
 ```swift
-func application ( _ application : UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken : Data) {
-    //strEmail = your application identity
-    // Register User Device with NetCore
-    NetCoreInstallation.sharedInstance().netCorePushRegisteration(strEmail as! String!, withDeviceToken: deviceToken) {     (status) in }
+func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+
+//Identity must be “”(blank) or as per Primary key which defined on smartech Panel
+NetCoreInstallation.sharedInstance().netCorePushRegisteration(Identity, withDeviceToken: deviceToken) { (status) in
+        }
 }
 ```
 
@@ -83,17 +90,20 @@ func application ( _ application : UIApplication, didReceiveRemoteNotification u
 func application (_ application : UIApplication , didReceive notification : UILocalNotification ){
     NetCorePushTaskManager.sharedInstance().didReceiveLocalNotification(notification.userInfo)
 }
-
+```
+```swift
+ // called when application is open when user click on notification
 extension AppDelegate: UNUserNotificationCenterDelegate {
-    // called when application is open when user click on notification
+   
     @objc (userNotificationCenter: didReceiveNotificationResponse :withCompletionHandler:)
     @available ( iOS 10.0 , * )
     func userNotificationCenter ( _ center : UNUserNotificationCenter, didReceive
-    response : UNNotificationResponse, withCompletionHandler completionHandler : @escaping () -> Void ) {
+    response : UNNotificationResponse, withCompletionHandler completionHandler :
+    @escaping () -> Void ) {
         // perform notification received/click action as per third party SDK as per their document
         NetCorePushTaskManager.sharedInstance().userNotificationdidReceive(response)
+        }
     }
-}
 ```
 5. Handle Deep Linking
 ```swift
@@ -103,19 +113,21 @@ func application(_ application: UIApplication, open url: URL, sourceApplication:
     }
     return true
 }
-
+```
+```swift
+//For Handling deep link
 extension AppDelegate : NetCorePushTaskManagerDelegate {
-    func handleNotificationOpenAction(_ userInfo: [AnyHashable : Any]!, deepLinkType strType: String!) {
-        if strType .lowercased().contains ("your app deep link"){
-            // handle deep link here
-        }
-    }
+func handleNotificationOpenAction(_ userInfo: [AnyHashable : Any]!, deepLinkType strType: String!) {
+    if strType .lowercased().contains ("your app deep link"){
+        // handle deep link here
+     }
+   }
 }
 ```
 6. Login with NetCore
 ```swift
-// strEmail = pass your device identity
-NetCoreInstallation.sharedInstance().netCorePushLogin(strEmail) {(statusCode:Int) in }
+// Identity must be “”(blank) or as per Primary key which defined on smartech Panel
+NetCoreInstallation.sharedInstance().netCorePushLogin(Identity) {(statusCode:Int) in }
 ```
 7. Logout
 ```swift
@@ -123,10 +135,10 @@ NetCoreInstallation.sharedInstance().netCorePushLogout { (statusCode:Int) in }
 ```
 8. Profile Push
 ```swift
-// strEmail = pass your device identity
+// Identity must be “”(blank) or as per Primary key which defined on smartech Panel
 let info = ["name":"Tester", "age":"23", "mobile":"9898948849"]
 
-NetCoreInstallation.sharedInstance().netCoreProfilePush(strEmail, payload: ino, block: nil)
+NetCoreInstallation.sharedInstance().netCoreProfilePush(Identity, payload: ino, block: nil)
 ```
 9. Events Tracking:
 Following is the list of tracking events
@@ -136,8 +148,6 @@ tracking_AddToCart = 2,
 tracking_CheckOut = 3,
 tracking_CartExpiry = 4,
 tracking_RemoveFromCart = 5,
-tracking_FirstLaunch = 20,
-tracking_AppLaunch = 21
 ```
 You can use this events following ways
 
@@ -153,7 +163,7 @@ NetCoreAppTracking.sharedInstance().sendEvent(withCustomPayload:Int(UInt32(track
 ```
 12. To fetch delivered push notifications
 ```swift
-let array : Array = netCoreSharedManager.sharedInstance().getNotifications()
+let notificationArray : Array = NetCoreSharedManager.sharedInstance().getNotifications()
 ```
 
 ### Deployment Over Apple Store

@@ -7,7 +7,7 @@
  
  @author NetCore
  @copyright  2016 NetCore
- @version    2.2.0
+ @version    2.1.5
  */
 
 #import <Foundation/Foundation.h>
@@ -77,7 +77,6 @@
  @param  notiData - contains query parameters of url
  */
 -(void)setDeepLinkQueryParameters:(NSDictionary *)notiData;
-
 /*
  @Method checkSessionId: this method checks for session id expiration and renews it.
  */
